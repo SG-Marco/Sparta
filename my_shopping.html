@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
+
+    <style>
+        .item{
+            width: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    
+        .price{
+            font-size: 20px;
+        }
+        .customerData {
+            width: auto;
+            margin: auto;
+        }
+
+        .button {
+            width: 100px;
+            margin: auto;
+
+            display:block 
+        }
+        .btn-order {
+            margin: auto;
+            width: 100px;
+
+            display: block;
+        }
+        .wrap {
+            width: 600px;
+            margin: auto;
+        }
+        .rate {
+            color: blue;
+        }
+    </style>
+
+    <script>
+        function order(){
+            alert('주문이 완료되었습니다!');
+        }
+        function rate() {
+            $.ajax({
+                type: "GET",
+                url: "http://spartacodingclub.shop/sparta_api/rate",
+                data: {},
+                success: function (response) {
+                    let exchangeRate = `<p class="rate">원 - 달러 환율 : ${response['rate']}</p>`
+                    $('#exchange-rate').append(exchangeRate);
+                }
+            })
+        }
+        $(document).ready(function(){
+            rate();
+        });
+
+
+    </script>
+
+</head>
+
+<body>
+    <div class="wrap">
+        <img src="https://d2ur7st6jjikze.cloudfront.net/offer_photos/29590/185689_medium_1525763241.jpg?1525763241" class="rounded mx-auto d-block" alt="">
+        <div class="item">
+            <h1>
+                자동차 팝니다 <span class="price"> 가격 : 오백만원</span>
+            </h1>
+            <p id="exchange-rate">
+
+            </p>
+            <p>
+                힘세고 오래가는 자동차
+            </p>
+        </div>
+
+        <div class="customerData">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">이름</span>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+            </div>    
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">수량</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01">
+                <option selected>--수량을 선택하세요--</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">주소</span>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+            </div>    
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">전화번호</span>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+            </div>    
+        </div>
+
+        <button type="button" onclick="order()" class="btn btn-primary button">주문하기</button>
+    </div>
+</body>
+</html>

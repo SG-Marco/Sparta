@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style>
+    </style>
+    <script>
+        
+        $(document).ready(function () {
+            get_rate();
+        });
+
+        function get_rate(){
+            $.ajax({
+                type: "GET",
+                url: "http://spartacodingclub.shop/sparta_api/rate",
+                data: {},
+                success: function (response) {
+                    let now_rate = response['rate'];
+                    $('#now-rate').text(now_rate);
+                }
+            })
+        }
+
+        function order() {
+            
+            let buyer = $("#buyer").val();
+            let number = $("#number").val();
+            let address = $("#address").val();
+            let phone = $("#phone").val();
+
+            alert("1")
+            $.ajax({
+                type: "POST",
+                url: "/saveorder",
+                data: {
+                    buyer_give: buyer,
+                    number_give : number,
+                    address_give : address,
+                    phone_give : phone
+                },
+                success: function(response) {
+                    alert("됐나?");
+                    if (response['result'] == "success") {
+                        alert(response['msg']);
+                        window.location.reload();
+                    }
+                }
+            })     
+            
+        }
+
+    //     function makeReview() {
+    // // 화면에 입력어 있는 제목, 저자, 리뷰 내용을 가져옵니다.
+    //         let title = $("#title").val();
+    //         let author = $("#author").val();
+    //         let review = $("#bookReview").val();
+
+    //         // POST /review 에 저장(Create)을 요청합니다.
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "/review",
+    //             data: { title_give: title, author_give: author, review_give: review },
+    //             success: function (response) {
+    //                 alert(response["msg"]);
+    //                 window.location.reload();
+    //             }
+    //         })
+    //     }
+
+        function test() {
+            alert("asldjflkajf");
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="item-img"></div>
+    <div class="item-desc">
+        <h1>양초를 팝니다 <span class="price">가격:3,000원/개</span></h1>
+        <p>이 양초는 사실 특별한 힘을 지니고 있어요!</p>
+        <p class="rate">달러-원 환율: <span id="now-rate">1212413419.15</span></p>
+    </div>
+</body>
+
+</html>

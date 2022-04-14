@@ -1,0 +1,1 @@
+print("THIS IS EC2 AWS TEST")
